@@ -1,5 +1,4 @@
-/// <reference path="../opencc-js.d.ts" />
-import * as OpenCC from 'opencc-js/cn2t';
+import { ConverterFactory, Locale } from './opencc-cn2t.js';
 
 import type { LocaleMessageValue } from './dictionary';
 
@@ -25,9 +24,9 @@ const TRADITIONAL_CHINESE_OVERRIDE_DICT = [
   ['上传', '上傳'],
 ] as const;
 
-const converter = OpenCC.ConverterFactory(
-  OpenCC.Locale.from.cn,
-  OpenCC.Locale.to.twp,
+const converter = ConverterFactory(
+  Locale.from.cn,
+  Locale.to.twp,
   [TRADITIONAL_CHINESE_OVERRIDE_DICT],
 );
 

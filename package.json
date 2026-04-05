@@ -4,8 +4,5 @@
   "type": "module",
   "exports": {
     "./i18n-core": "./i18n-core/index.ts"
-  },
-  "dependencies": {
-    "opencc-js": "^1.0.5"
   }
 }
