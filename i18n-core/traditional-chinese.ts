@@ -1,4 +1,4 @@
-// @ts-expect-error opencc-js does not ship type declarations for this subpath.
+/// <reference path="../opencc-js.d.ts" />
 import * as OpenCC from 'opencc-js/cn2t';
 
 import type { LocaleMessageValue } from './dictionary';

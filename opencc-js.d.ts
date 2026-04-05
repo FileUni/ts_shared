@@ -1,7 +1,15 @@
 declare module 'opencc-js/cn2t' {
-  export const ConverterFactory: (...args: unknown[]) => (value: string) => string;
+  export const ConverterFactory: (
+    from: unknown,
+    to: unknown,
+    customDicts?: ReadonlyArray<ReadonlyArray<readonly [string, string]>>,
+  ) => (value: string) => string;
   export const Locale: {
-    from: Record<string, unknown>;
-    to: Record<string, unknown>;
+    from: {
+      cn: unknown;
+    };
+    to: {
+      twp: unknown;
+    };
   };
 }
