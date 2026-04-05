@@ -1,0 +1,8 @@
+{
+  "name": "@fileuni/ts-shared",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "opencc-js": "^1.0.5"
+  }
+}

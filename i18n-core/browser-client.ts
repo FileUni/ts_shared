@@ -1,5 +1,6 @@
 import { DEFAULT_LOCALE } from './locales';
 import { getFileUniCookieDomain } from './preferences';
+import { createDisclosureState, reduceDisclosureState } from './headless';
 import type { SupportedLocale } from './locales';
 
 export type LocalePathOption = {
@@ -101,22 +102,21 @@ export function attachDropdownMenu(
     return () => {};
   }
 
-  const closeMenu = () => {
-    menu.hidden = true;
-    trigger.setAttribute('aria-expanded', 'false');
+  let state = createDisclosureState(false);
+
+  const syncMenu = () => {
+    menu.hidden = !state.open;
+    trigger.setAttribute('aria-expanded', state.open ? 'true' : 'false');
   };
 
-  const openMenu = () => {
-    menu.hidden = false;
-    trigger.setAttribute('aria-expanded', 'true');
+  const closeMenu = () => {
+    state = reduceDisclosureState(state, { type: 'close' });
+    syncMenu();
   };
 
   const handleTriggerClick = () => {
-    if (menu.hidden) {
-      openMenu();
-      return;
-    }
-    closeMenu();
+    state = reduceDisclosureState(state, { type: 'toggle' });
+    syncMenu();
   };
 
   const handleDocumentClick = (event: MouseEvent) => {
@@ -136,6 +136,7 @@ export function attachDropdownMenu(
   trigger.addEventListener('click', handleTriggerClick);
   document.addEventListener('click', handleDocumentClick);
   root.addEventListener('keydown', handleRootKeydown);
+  syncMenu();
   for (const item of items) {
     item.addEventListener('click', () => {
       config.onSelect(item);

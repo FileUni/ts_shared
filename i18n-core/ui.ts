@@ -30,11 +30,25 @@ export function getLocaleNativeLabel(locale: SupportedLocale): string {
   return getLocalePickerOption(locale).nativeLabel;
 }
 
-export const FILEUNI_LANGUAGE_MENU_CLASSNAMES = {
-  trigger:
+export const FILEUNI_CONTROL_METRICS = {
+  buttonSizePx: 40,
+  buttonMinHeightPx: 32,
+  borderRadiusPx: 12,
+  menuWidthPx: 224,
+  iconSizePx: 18,
+} as const;
+
+export const FILEUNI_ICON_BUTTON_CLASSNAMES = {
+  button:
     'h-9 w-10 rounded-xl border inline-flex items-center justify-center transition-all',
-  triggerDark: 'bg-white/5 border-white/10 hover:bg-white/10',
-  triggerLight: 'bg-gray-100 border-gray-200 hover:bg-gray-200',
+  dark: 'bg-white/5 border-white/10 hover:bg-white/10',
+  light: 'bg-gray-100 border-gray-200 hover:bg-gray-200',
+} as const;
+
+export const FILEUNI_LANGUAGE_MENU_CLASSNAMES = {
+  trigger: FILEUNI_ICON_BUTTON_CLASSNAMES.button,
+  triggerDark: FILEUNI_ICON_BUTTON_CLASSNAMES.dark,
+  triggerLight: FILEUNI_ICON_BUTTON_CLASSNAMES.light,
   menu:
     'absolute right-0 mt-2 w-56 rounded-2xl border shadow-2xl overflow-hidden z-50',
   menuDark: 'bg-zinc-950 border-white/10',
@@ -45,4 +59,10 @@ export const FILEUNI_LANGUAGE_MENU_CLASSNAMES = {
   itemActiveLight: 'bg-gray-100',
   itemIdleDark: 'hover:bg-white/5',
   itemIdleLight: 'hover:bg-gray-50',
+} as const;
+
+export const FILEUNI_THEME_TOGGLE_CLASSNAMES = {
+  button: FILEUNI_ICON_BUTTON_CLASSNAMES.button,
+  dark: FILEUNI_ICON_BUTTON_CLASSNAMES.dark,
+  light: FILEUNI_ICON_BUTTON_CLASSNAMES.light,
 } as const;

@@ -26,12 +26,23 @@ export {
 } from './preferences';
 export {
   FILEUNI_LANGUAGE_MENU_CLASSNAMES,
+  FILEUNI_CONTROL_METRICS,
+  FILEUNI_ICON_BUTTON_CLASSNAMES,
+  FILEUNI_THEME_TOGGLE_CLASSNAMES,
   LOCALE_PICKER_OPTIONS,
   getLocaleFlag,
   getLocaleNativeLabel,
   getLocalePickerOption,
   type LocalePickerOption,
 } from './ui';
+export {
+  createDisclosureState,
+  getNextBinaryTheme,
+  reduceDisclosureState,
+  type BinaryTheme,
+  type DisclosureAction,
+  type DisclosureState,
+} from './headless';
 export {
   attachDropdownMenu,
   buildLocalePath,
@@ -42,4 +53,14 @@ export {
   writeCookieValue,
   type LocalePathOption,
 } from './browser-client';
+export {
+  applyBrowserTheme,
+  initPathLocaleThemeBootstrap,
+  mountPathLocaleDropdown,
+  parseBrowserThemePreference,
+  resolveBrowserThemePreference,
+  type BrowserThemePreference,
+  type ThemeApplyStrategy,
+} from './browser-bootstrap';
 export { buildLocaleUrl } from './urls';
+export { toTraditionalChineseDeep, toTraditionalChineseString } from './traditional-chinese';

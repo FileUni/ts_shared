@@ -1,4 +1,5 @@
 import { DEFAULT_LOCALE, type SupportedLocale } from './locales';
+import { toTraditionalChineseDeep } from './traditional-chinese';
 
 const DERIVED_LOCALE_FALLBACKS = {
   'zh-Hant': 'zh-CN',
@@ -36,7 +37,10 @@ export function defineLocaleBundle<const Base extends Record<string, LocaleMessa
     [SupportedLocale, SupportedLocale]
   >) {
     if (!resolved[locale] && resolved[fallbackLocale]) {
-      resolved[locale] = resolved[fallbackLocale];
+      resolved[locale] =
+        locale === 'zh-Hant'
+          ? toTraditionalChineseDeep(resolved[fallbackLocale])
+          : resolved[fallbackLocale];
     }
   }
 
