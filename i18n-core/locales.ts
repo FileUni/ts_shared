@@ -1,11 +1,12 @@
 export const DEFAULT_LOCALE = 'en';
 
-export const SUPPORTED_LOCALES = ['en', 'zh-cn', 'es', 'de', 'fr', 'ru', 'ja'] as const;
+export const SUPPORTED_LOCALES = ['en', 'zh-CN', 'zh-Hant', 'es', 'de', 'fr', 'ru', 'ja'] as const;
 
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 export type LocaleMetadata = {
   readonly label: string;
+  readonly nativeLabel: string;
   readonly flag: string;
   readonly htmlLang: string;
   readonly ogLocale: string;
@@ -17,6 +18,7 @@ export type LocaleMetadata = {
 export const LOCALE_METADATA = {
   en: {
     label: 'English',
+    nativeLabel: 'English',
     flag: '🇬🇧',
     htmlLang: 'en',
     ogLocale: 'en_US',
@@ -24,17 +26,29 @@ export const LOCALE_METADATA = {
     dateLocale: 'en-US',
     aliases: ['en-us', 'en-gb', 'en-au', 'en-ca'],
   },
-  'zh-cn': {
+  'zh-CN': {
     label: '简体中文',
+    nativeLabel: '简体中文',
     flag: '🇨🇳',
     htmlLang: 'zh-CN',
     ogLocale: 'zh_CN',
-    pathPrefix: '/zh-cn',
+    pathPrefix: '/zh-CN',
     dateLocale: 'zh-CN',
-    aliases: ['zh', 'zh-hans', 'zh-sg', 'zh-cn'],
+    aliases: ['zh', 'zh-hans', 'zh-sg'],
+  },
+  'zh-Hant': {
+    label: '繁體中文',
+    nativeLabel: '繁體中文',
+    flag: '🇹🇼',
+    htmlLang: 'zh-Hant',
+    ogLocale: 'zh_TW',
+    pathPrefix: '/zh-Hant',
+    dateLocale: 'zh-TW',
+    aliases: ['zh-hant', 'zh-tw', 'zh-hk', 'zh-mo'],
   },
   es: {
     label: 'Español',
+    nativeLabel: 'Español',
     flag: '🇪🇸',
     htmlLang: 'es',
     ogLocale: 'es_ES',
@@ -44,6 +58,7 @@ export const LOCALE_METADATA = {
   },
   de: {
     label: 'Deutsch',
+    nativeLabel: 'Deutsch',
     flag: '🇩🇪',
     htmlLang: 'de',
     ogLocale: 'de_DE',
@@ -53,6 +68,7 @@ export const LOCALE_METADATA = {
   },
   fr: {
     label: 'Français',
+    nativeLabel: 'Français',
     flag: '🇫🇷',
     htmlLang: 'fr',
     ogLocale: 'fr_FR',
@@ -62,6 +78,7 @@ export const LOCALE_METADATA = {
   },
   ru: {
     label: 'Русский',
+    nativeLabel: 'Русский',
     flag: '🇷🇺',
     htmlLang: 'ru',
     ogLocale: 'ru_RU',
@@ -71,6 +88,7 @@ export const LOCALE_METADATA = {
   },
   ja: {
     label: '日本語',
+    nativeLabel: '日本語',
     flag: '🇯🇵',
     htmlLang: 'ja',
     ogLocale: 'ja_JP',

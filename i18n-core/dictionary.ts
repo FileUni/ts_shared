@@ -1,5 +1,9 @@
 import { DEFAULT_LOCALE, type SupportedLocale } from './locales';
 
+const DERIVED_LOCALE_FALLBACKS = {
+  'zh-Hant': 'zh-CN',
+} as const satisfies Partial<Record<SupportedLocale, SupportedLocale>>;
+
 type LocaleScalar = string | number | boolean | null;
 
 export type LocaleMessageValue =
@@ -23,10 +27,20 @@ export type LocaleShape<T> = T extends string
 
 export function defineLocaleBundle<const Base extends Record<string, LocaleMessageValue>>(
   bundle: { readonly en: Base } & {
-    readonly [Locale in Exclude<SupportedLocale, 'en'>]: LocaleShape<Base>;
+    readonly [Locale in Exclude<SupportedLocale, 'en'>]?: LocaleShape<Base>;
   },
 ) {
-  return bundle;
+  const resolved = { ...(bundle as unknown as Record<SupportedLocale, LocaleShape<Base>>) };
+
+  for (const [locale, fallbackLocale] of Object.entries(DERIVED_LOCALE_FALLBACKS) as Array<
+    [SupportedLocale, SupportedLocale]
+  >) {
+    if (!resolved[locale] && resolved[fallbackLocale]) {
+      resolved[locale] = resolved[fallbackLocale];
+    }
+  }
+
+  return resolved as { readonly [Locale in SupportedLocale]: LocaleShape<Base> };
 }
 
 export function pickLocale<T>(bundle: Record<SupportedLocale, T>, locale: SupportedLocale): T {

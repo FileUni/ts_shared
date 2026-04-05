@@ -1,13 +1,12 @@
 import {
   DEFAULT_LOCALE,
   LOCALE_METADATA,
-  SUPPORTED_LOCALE_SET,
   type SupportedLocale,
 } from './locales';
 
 const BASE_LOCALE_MAP: Record<string, SupportedLocale> = {
   en: 'en',
-  zh: 'zh-cn',
+  zh: 'zh-CN',
   es: 'es',
   de: 'de',
   fr: 'fr',
@@ -19,8 +18,15 @@ const normalizeRawLocale = (value: string): string => {
   return value.trim().toLowerCase().replace(/_/g, '-');
 };
 
+const CANONICAL_LOCALE_BY_NORMALIZED = Object.fromEntries(
+  (Object.keys(LOCALE_METADATA) as SupportedLocale[]).map((locale) => [
+    normalizeRawLocale(locale),
+    locale,
+  ]),
+) as Record<string, SupportedLocale>;
+
 export function isSupportedLocale(value: string | null | undefined): value is SupportedLocale {
-  return typeof value === 'string' && SUPPORTED_LOCALE_SET.has(normalizeRawLocale(value));
+  return typeof value === 'string' && normalizeLocale(value) !== null;
 }
 
 export function normalizeLocale(value: string | null | undefined): SupportedLocale | null {
@@ -33,8 +39,9 @@ export function normalizeLocale(value: string | null | undefined): SupportedLoca
     return null;
   }
 
-  if (SUPPORTED_LOCALE_SET.has(normalized)) {
-    return normalized as SupportedLocale;
+  const canonical = CANONICAL_LOCALE_BY_NORMALIZED[normalized];
+  if (canonical) {
+    return canonical;
   }
 
   for (const locale of Object.keys(LOCALE_METADATA) as SupportedLocale[]) {
