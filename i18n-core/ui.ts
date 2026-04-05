@@ -38,6 +38,15 @@ export const FILEUNI_CONTROL_METRICS = {
   iconSizePx: 18,
 } as const;
 
+export const FILEUNI_TRANSLATION_ICON_PATHS = [
+  'm5 8 6 6',
+  'm4 14 6-6 2-3',
+  'M2 5h12',
+  'M7 2h1',
+  'm22 22-5-10-5 10',
+  'M14 18h6',
+] as const;
+
 export const FILEUNI_ICON_BUTTON_CLASSNAMES = {
   button:
     'h-9 w-10 rounded-xl border inline-flex items-center justify-center transition-all',
@@ -46,9 +55,13 @@ export const FILEUNI_ICON_BUTTON_CLASSNAMES = {
 } as const;
 
 export const FILEUNI_LANGUAGE_MENU_CLASSNAMES = {
-  trigger: FILEUNI_ICON_BUTTON_CLASSNAMES.button,
+  trigger:
+    'h-9 min-w-0 rounded-xl border inline-flex items-center justify-center gap-2 px-3 transition-all',
   triggerDark: FILEUNI_ICON_BUTTON_CLASSNAMES.dark,
   triggerLight: FILEUNI_ICON_BUTTON_CLASSNAMES.light,
+  triggerCompact: 'px-2.5 gap-1.5',
+  triggerGlyph: 'shrink-0 text-[11px] font-black tracking-tight opacity-70',
+  triggerLabel: 'truncate text-sm font-semibold leading-none',
   menu:
     'absolute right-0 mt-2 w-56 rounded-2xl border shadow-2xl overflow-hidden z-50',
   menuDark: 'bg-zinc-950 border-white/10',

@@ -28,6 +28,7 @@ export {
   FILEUNI_LANGUAGE_MENU_CLASSNAMES,
   FILEUNI_CONTROL_METRICS,
   FILEUNI_ICON_BUTTON_CLASSNAMES,
+  FILEUNI_TRANSLATION_ICON_PATHS,
   FILEUNI_THEME_TOGGLE_CLASSNAMES,
   LOCALE_PICKER_OPTIONS,
   getLocaleFlag,
@@ -63,4 +64,5 @@ export {
   type ThemeApplyStrategy,
 } from './browser-bootstrap';
 export { buildLocaleUrl } from './urls';
+export { getSiteChromeMeta, type SiteChromeLocale, type SiteChromeMeta } from './site-chrome';
 export { toTraditionalChineseDeep, toTraditionalChineseString } from './traditional-chinese';
