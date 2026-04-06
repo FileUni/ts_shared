@@ -1,1 +1,1 @@
-export * from './locale/dictionary';
+export * from '../locale/dictionary';

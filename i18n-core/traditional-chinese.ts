@@ -1,1 +1,1 @@
-export * from './locale/traditional-chinese';
+export * from '../locale/traditional-chinese';

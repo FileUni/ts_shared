@@ -1,1 +1,1 @@
-export * from './locale/site-chrome';
+export * from '../locale/site-chrome';

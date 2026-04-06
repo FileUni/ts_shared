@@ -1,1 +1,1 @@
-export * from './locale/paths';
+export * from '../locale/paths';

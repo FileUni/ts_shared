@@ -1,1 +1,1 @@
-export * from './controls/ui';
+export * from '../controls/ui';

@@ -1,1 +1,1 @@
-export * from './locale/preferences';
+export * from '../locale/preferences';

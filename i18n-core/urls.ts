@@ -1,1 +1,1 @@
-export * from './locale/urls';
+export * from '../locale/urls';
