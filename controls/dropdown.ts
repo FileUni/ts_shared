@@ -1,6 +1,8 @@
 import { normalizeLocale } from '../locale/detect';
 import { buildLocalePath, writeCookieValue, type LocalePathOption } from '../locale/browser';
 
+export type { LocalePathOption } from '../locale/browser';
+
 import { createDisclosureState, reduceDisclosureState } from './disclosure';
 
 export function attachDropdownMenu(
