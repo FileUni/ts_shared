@@ -3,10 +3,16 @@
   "version": "0.1.0",
   "type": "module",
   "files": [
-    "i18n-core"
+    "controls",
+    "i18n-core",
+    "locale",
+    "theme"
   ],
   "exports": {
-    "./i18n-core": "./i18n-core/index.ts"
+    "./controls": "./controls/index.ts",
+    "./i18n-core": "./i18n-core/index.ts",
+    "./locale": "./locale/index.ts",
+    "./theme": "./theme/index.ts"
   },
   "repository": {
     "type": "git",

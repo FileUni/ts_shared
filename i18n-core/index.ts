@@ -5,16 +5,16 @@ export {
   SUPPORTED_LOCALE_SET,
   type LocaleMetadata,
   type SupportedLocale,
-} from './locale/locales';
-export { detectLocale, detectLocaleFromNavigator, isSupportedLocale, normalizeLocale } from './locale/detect';
+} from '../locale/locales';
+export { detectLocale, detectLocaleFromNavigator, isSupportedLocale, normalizeLocale } from '../locale/detect';
 export {
   getAlternateLocaleEntries,
   getLocaleFromPathname,
   getPathBasedLocaleOptions,
   stripLocalePrefix,
   translatePathWithLocale,
-} from './locale/paths';
-export { defineLocaleBundle, pickLocale, type LocaleMessageValue, type LocaleShape } from './locale/dictionary';
+} from '../locale/paths';
+export { defineLocaleBundle, pickLocale, type LocaleMessageValue, type LocaleShape } from '../locale/dictionary';
 export {
   AUTO_LOCALE_PREFERENCE,
   FILEUNI_LANGUAGE_STORAGE_KEY,
@@ -23,7 +23,7 @@ export {
   parseLocalePreference,
   resolveLocalePreference,
   type LocalePreference,
-} from './locale/preferences';
+} from '../locale/preferences';
 export {
   FILEUNI_LANGUAGE_MENU_CLASSNAMES,
   FILEUNI_CONTROL_METRICS,
@@ -35,25 +35,25 @@ export {
   getLocaleNativeLabel,
   getLocalePickerOption,
   type LocalePickerOption,
-} from './controls/ui';
+} from '../controls/ui';
 export {
   createDisclosureState,
   reduceDisclosureState,
   type DisclosureAction,
   type DisclosureState,
-} from './controls/disclosure';
-export { getNextBinaryTheme, type BinaryTheme } from './theme/toggle';
+} from '../controls/disclosure';
+export { getNextBinaryTheme, type BinaryTheme } from '../theme/toggle';
 export {
   applyClassDarkTheme,
   parseThemePreference,
   resolveThemePreference,
   type ThemePreference,
-} from './theme/preference';
+} from '../theme/preference';
 export {
   buildThemeHeadBootstrap,
   type ThemeHeadBootstrap,
   type ThemeHeadBootstrapOptions,
-} from './theme/head';
+} from '../theme/head';
 export {
   buildLocalePath,
   getLocaleFromPath,
@@ -62,11 +62,11 @@ export {
   stripLocalePrefixFromPath,
   writeCookieValue,
   type LocalePathOption,
-} from './locale/browser';
-export { attachDropdownMenu, mountPathLocaleDropdown } from './controls/dropdown';
-export { definePathLocaleDropdownElement } from './controls/language-element';
-export { defineBinaryThemeToggleElement } from './controls/theme-element';
-export { observeColorSchemePreference, observeDocumentAttribute } from './controls/observe';
+} from '../locale/browser';
+export { attachDropdownMenu, mountPathLocaleDropdown } from '../controls/dropdown';
+export { definePathLocaleDropdownElement } from '../controls/language-element';
+export { defineBinaryThemeToggleElement } from '../controls/theme-element';
+export { observeColorSchemePreference, observeDocumentAttribute } from '../controls/observe';
 export {
   applyBrowserTheme,
   initPathLocaleThemeBootstrap,
@@ -74,7 +74,7 @@ export {
   resolveBrowserThemePreference,
   type BrowserThemePreference,
   type ThemeApplyStrategy,
-} from './theme/browser';
-export { buildLocaleUrl } from './locale/urls';
-export { getSiteChromeMeta, type SiteChromeLocale, type SiteChromeMeta } from './locale/site-chrome';
-export { toTraditionalChineseDeep, toTraditionalChineseString } from './locale/traditional-chinese';
+} from '../theme/browser';
+export { buildLocaleUrl } from '../locale/urls';
+export { getSiteChromeMeta, type SiteChromeLocale, type SiteChromeMeta } from '../locale/site-chrome';
+export { toTraditionalChineseDeep, toTraditionalChineseString } from '../locale/traditional-chinese';
