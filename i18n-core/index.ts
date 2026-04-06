@@ -50,6 +50,11 @@ export {
   type ThemePreference,
 } from './theme/preference';
 export {
+  buildThemeHeadBootstrap,
+  type ThemeHeadBootstrap,
+  type ThemeHeadBootstrapOptions,
+} from './theme/head';
+export {
   buildLocalePath,
   getLocaleFromPath,
   isLocaleRootPath,

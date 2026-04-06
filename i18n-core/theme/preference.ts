@@ -18,5 +18,8 @@ export function resolveThemePreference(
 }
 
 export function applyClassDarkTheme(documentRef: Document, theme: ThemePreference): void {
-  documentRef.documentElement.classList.toggle('dark', resolveThemePreference(theme) === 'dark');
+  const resolvedTheme = resolveThemePreference(theme);
+  documentRef.documentElement.setAttribute('data-fileuni-resolved-theme', resolvedTheme);
+  documentRef.documentElement.style.colorScheme = resolvedTheme;
+  documentRef.documentElement.classList.toggle('dark', resolvedTheme === 'dark');
 }

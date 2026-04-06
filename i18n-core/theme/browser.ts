@@ -36,6 +36,8 @@ export function applyBrowserTheme(
   strategy: ThemeApplyStrategy,
   theme: 'light' | 'dark',
 ): void {
+  documentRef.documentElement.setAttribute('data-fileuni-resolved-theme', theme);
+  documentRef.documentElement.style.colorScheme = theme;
   if (strategy === 'class-dark') {
     documentRef.documentElement.classList.toggle('dark', theme === 'dark');
     return;
