@@ -1,3 +1,4 @@
+import { normalizeLocale } from './detect';
 import { DEFAULT_LOCALE, LOCALE_METADATA, type SupportedLocale } from './locales';
 
 function normalizePath(pathname = ''): string {
@@ -9,7 +10,8 @@ function normalizePath(pathname = ''): string {
 }
 
 export function buildLocaleUrl(origin: string, locale: SupportedLocale, pathname = '/'): string {
-  const prefix = LOCALE_METADATA[locale].pathPrefix || LOCALE_METADATA[DEFAULT_LOCALE].pathPrefix;
+  const normalizedLocale = normalizeLocale(locale) ?? DEFAULT_LOCALE;
+  const prefix = LOCALE_METADATA[normalizedLocale].pathPrefix || LOCALE_METADATA[DEFAULT_LOCALE].pathPrefix;
   const normalizedPath = normalizePath(pathname);
   if (normalizedPath === '/') {
     return `${origin}${prefix || '/'}`;
