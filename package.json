@@ -3,18 +3,20 @@
   "version": "0.1.0",
   "type": "module",
   "files": [
-    "controls",
-    "i18n-core",
-    "locale",
-    "react-ui",
-    "theme"
+    "form-fields",
+    "language-menu",
+    "localization",
+    "password-fields",
+    "theme-system",
+    "theme-toggle"
   ],
   "exports": {
-    "./controls": "./controls/index.ts",
-    "./i18n-core": "./i18n-core/index.ts",
-    "./locale": "./locale/index.ts",
-    "./react-ui": "./react-ui/index.ts",
-    "./theme": "./theme/index.ts"
+    "./form-fields": "./form-fields/index.ts",
+    "./language-menu": "./language-menu/index.ts",
+    "./localization": "./localization/index.ts",
+    "./password-fields": "./password-fields/index.ts",
+    "./theme-system": "./theme-system/index.ts",
+    "./theme-toggle": "./theme-toggle/index.ts"
   },
   "peerDependencies": {
     "clsx": ">=2.1.1",
