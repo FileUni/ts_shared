@@ -6,13 +6,21 @@
     "controls",
     "i18n-core",
     "locale",
+    "react-ui",
     "theme"
   ],
   "exports": {
     "./controls": "./controls/index.ts",
     "./i18n-core": "./i18n-core/index.ts",
     "./locale": "./locale/index.ts",
+    "./react-ui": "./react-ui/index.ts",
     "./theme": "./theme/index.ts"
+  },
+  "peerDependencies": {
+    "clsx": ">=2.1.1",
+    "lucide-react": ">=0.474.0",
+    "react": ">=19.0.0",
+    "tailwind-merge": ">=3.0.1"
   },
   "repository": {
     "type": "git",
