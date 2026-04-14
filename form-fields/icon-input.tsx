@@ -25,7 +25,7 @@ export const IconInput = React.forwardRef<HTMLInputElement, IconInputProps>(
         <TextInput
           ref={ref}
           {...props}
-          className={cn(hasIcon && 'pl-12', hasRight && 'pr-12', inputClassName)}
+          className={cn(inputClassName, hasIcon && 'pl-12', hasRight && 'pr-12')}
         />
         {hasRight ? <div className="absolute right-4 top-1/2 -translate-y-1/2">{right}</div> : null}
       </div>
