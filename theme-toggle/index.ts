@@ -4,12 +4,22 @@ import {
   type ThemeApplyStrategy,
 } from '../theme-system/browser-theme';
 import { getNextBinaryTheme } from '../theme-system/binary-toggle';
+import { LOCALE_MENU_METRICS } from '../language-menu/base';
 
 export const THEME_TOGGLE_CLASSNAMES = {
   button: 'h-9 w-10 rounded-xl border inline-flex items-center justify-center transition-all',
   dark: 'bg-white/5 border-white/10 hover:bg-white/10',
   light: 'bg-gray-100 border-gray-200 hover:bg-gray-200',
 } as const;
+
+export function createThemeToggleControlStyle(): string {
+  return [
+    `--fu-control-size:${LOCALE_MENU_METRICS.buttonSizePx}px`,
+    `--fu-control-min-height:${LOCALE_MENU_METRICS.buttonMinHeightPx}px`,
+    `--fu-control-radius:${LOCALE_MENU_METRICS.borderRadiusPx}px`,
+    `--fu-control-icon-size:${LOCALE_MENU_METRICS.iconSizePx}px`,
+  ].join(';');
+}
 
 type ThemeCookieApi = {
   read: (name: string) => string | null;
@@ -86,3 +96,5 @@ export function defineBinaryThemeToggleElement(config: {
 
   customElements.define(config.tagName, BinaryThemeToggleElement);
 }
+
+export { createReactBinaryThemeToggleComponent, type ReactBinaryThemeToggleProps } from './react-theme-toggle';
