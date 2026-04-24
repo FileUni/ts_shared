@@ -156,15 +156,15 @@ export const GlassModalShell: React.FC<GlassModalShellProps> = ({
   const compactBody = compact === 'body' || compact === 'all'
   const effectiveZIndexClassName = zIndexClassName ?? (nested ? 'z-[290]' : 'z-[250]')
   const headerClassName = compactHeader
-    ? 'px-4 py-3 sm:px-5 sm:py-4 border-b border-white/5 flex items-center justify-between bg-white/[0.02] shrink-0 gap-3'
-    : 'px-4 py-4 sm:p-8 border-b border-white/5 flex items-center justify-between bg-white/[0.02] shrink-0 gap-3 sm:gap-4'
+    ? 'px-4 py-3 sm:px-5 sm:py-4 border-b border-border/60 flex items-center justify-between bg-background/70 shrink-0 gap-3 backdrop-blur-md'
+    : 'px-4 py-4 sm:p-8 border-b border-border/60 flex items-center justify-between bg-background/70 shrink-0 gap-3 sm:gap-4 backdrop-blur-md'
   const titleClassName = compactHeader ? 'text-lg sm:text-xl' : 'text-xl'
-  const subtitleClassName = compactHeader ? 'text-xs opacity-35 mt-0.5' : 'text-xs sm:text-sm opacity-40 mt-1'
+  const subtitleClassName = compactHeader ? 'text-xs text-muted-foreground mt-0.5' : 'text-xs sm:text-sm text-muted-foreground mt-1'
   const footerClassName = compactFooter
-    ? 'px-4 py-3 sm:px-5 sm:py-4 lg:px-6 lg:py-5 bg-white/[0.02] border-t border-white/5 shrink-0'
-    : 'px-4 py-4 sm:p-6 lg:p-8 bg-white/[0.02] border-t border-white/5 shrink-0'
+    ? 'px-4 py-3 sm:px-5 sm:py-4 lg:px-6 lg:py-5 bg-background/70 border-t border-border/60 shrink-0 backdrop-blur-md'
+    : 'px-4 py-4 sm:p-6 lg:p-8 bg-background/70 border-t border-border/60 shrink-0 backdrop-blur-md'
   const effectiveBodyClassName = cn(
-    compactBody ? 'p-4 sm:p-5 lg:p-6' : 'p-4 sm:p-6 lg:p-8',
+    compactBody ? 'p-4 sm:p-5 lg:p-6 bg-background/80 text-foreground' : 'p-4 sm:p-6 lg:p-8 bg-background/80 text-foreground',
     bodyClassName,
   )
 
@@ -179,7 +179,7 @@ export const GlassModalShell: React.FC<GlassModalShellProps> = ({
 
         <div
           className={cn(
-            'bg-zinc-900 border border-white/10 w-full rounded-[2.5rem] shadow-2xl overflow-hidden relative z-10 animate-in zoom-in-95 duration-300 flex flex-col min-h-0 max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] pointer-events-auto',
+            'bg-background/92 text-foreground border border-border/70 w-full rounded-[2.5rem] shadow-2xl overflow-hidden relative z-10 animate-in zoom-in-95 duration-300 flex flex-col min-h-0 max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] pointer-events-auto backdrop-blur-xl',
             maxWidthClassName,
             panelClassName,
           )}
@@ -192,7 +192,7 @@ export const GlassModalShell: React.FC<GlassModalShellProps> = ({
               </div>
             ) : null}
             <div className="min-w-0">
-              <h3 className={cn(titleClassName, 'font-black text-white tracking-tight truncate')}>{title}</h3>
+              <h3 className={cn(titleClassName, 'font-black text-foreground tracking-tight truncate')}>{title}</h3>
               {subtitle ? (
                 <p className={cn(subtitleClassName, 'font-bold tracking-widest truncate')}>{subtitle}</p>
               ) : null}
@@ -203,7 +203,7 @@ export const GlassModalShell: React.FC<GlassModalShellProps> = ({
               type="button"
               onClick={onClose}
               aria-label={closeLabel}
-              className="rounded-2xl h-12 w-12 p-0 hover:bg-white/5 shrink-0 text-2xl opacity-40 leading-none transition-colors"
+              className="rounded-2xl h-12 w-12 p-0 hover:bg-accent shrink-0 text-2xl text-muted-foreground leading-none transition-colors"
             >
               ×
             </button>
