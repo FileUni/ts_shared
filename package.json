@@ -5,6 +5,7 @@
   "files": [
     "form-fields",
     "language-menu",
+    "modal-shell",
     "localization",
     "password-fields",
     "theme-system",
@@ -13,6 +14,7 @@
   "exports": {
     "./form-fields": "./form-fields/index.ts",
     "./language-menu": "./language-menu/index.ts",
+    "./modal-shell": "./modal-shell/index.ts",
     "./localization": "./localization/index.ts",
     "./password-fields": "./password-fields/index.ts",
     "./theme-system": "./theme-system/index.ts",
