@@ -156,15 +156,15 @@ export const GlassModalShell: React.FC<GlassModalShellProps> = ({
   const compactBody = compact === 'body' || compact === 'all'
   const effectiveZIndexClassName = zIndexClassName ?? (nested ? 'z-[290]' : 'z-[250]')
   const headerClassName = compactHeader
-    ? 'px-4 py-3 sm:px-5 sm:py-4 border-b border-zinc-200/60 dark:border-white/5 flex items-center justify-between bg-white/55 dark:bg-white/[0.03] shrink-0 gap-3 backdrop-blur-xl'
-    : 'px-4 py-4 sm:p-8 border-b border-zinc-200/60 dark:border-white/5 flex items-center justify-between bg-white/55 dark:bg-white/[0.03] shrink-0 gap-3 sm:gap-4 backdrop-blur-xl'
+    ? 'px-4 py-3 sm:px-5 sm:py-4 border-b border-[hsl(var(--modal-glass-border))] flex items-center justify-between bg-[hsl(var(--modal-glass-header-bg))] shrink-0 gap-3 backdrop-blur-xl'
+    : 'px-4 py-4 sm:p-8 border-b border-[hsl(var(--modal-glass-border))] flex items-center justify-between bg-[hsl(var(--modal-glass-header-bg))] shrink-0 gap-3 sm:gap-4 backdrop-blur-xl'
   const titleClassName = compactHeader ? 'text-lg sm:text-xl' : 'text-xl'
-  const subtitleClassName = compactHeader ? 'text-xs text-foreground/45 dark:text-white/40 mt-0.5' : 'text-xs sm:text-sm text-foreground/45 dark:text-white/40 mt-1'
+  const subtitleClassName = compactHeader ? 'text-xs text-[hsl(var(--modal-glass-muted-foreground))] mt-0.5' : 'text-xs sm:text-sm text-[hsl(var(--modal-glass-muted-foreground))] mt-1'
   const footerClassName = compactFooter
-    ? 'px-4 py-3 sm:px-5 sm:py-4 lg:px-6 lg:py-5 bg-white/50 dark:bg-white/[0.02] border-t border-zinc-200/60 dark:border-white/5 shrink-0 backdrop-blur-xl'
-    : 'px-4 py-4 sm:p-6 lg:p-8 bg-white/50 dark:bg-white/[0.02] border-t border-zinc-200/60 dark:border-white/5 shrink-0 backdrop-blur-xl'
+    ? 'px-4 py-3 sm:px-5 sm:py-4 lg:px-6 lg:py-5 bg-[hsl(var(--modal-glass-footer-bg))] border-t border-[hsl(var(--modal-glass-border))] shrink-0 backdrop-blur-xl'
+    : 'px-4 py-4 sm:p-6 lg:p-8 bg-[hsl(var(--modal-glass-footer-bg))] border-t border-[hsl(var(--modal-glass-border))] shrink-0 backdrop-blur-xl'
   const effectiveBodyClassName = cn(
-    compactBody ? 'p-4 sm:p-5 lg:p-6 bg-white/45 dark:bg-white/[0.02] text-foreground' : 'p-4 sm:p-6 lg:p-8 bg-white/45 dark:bg-white/[0.02] text-foreground',
+    compactBody ? 'p-4 sm:p-5 lg:p-6 bg-[hsl(var(--modal-glass-bg))] text-[hsl(var(--modal-glass-foreground))]' : 'p-4 sm:p-6 lg:p-8 bg-[hsl(var(--modal-glass-bg))] text-[hsl(var(--modal-glass-foreground))]',
     bodyClassName,
   )
 
@@ -173,13 +173,13 @@ export const GlassModalShell: React.FC<GlassModalShellProps> = ({
       <button
         type="button"
         aria-label={closeLabel}
-        className={cn('fixed inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300 pointer-events-auto', overlayClassName)}
+        className={cn('fixed inset-0 bg-[hsl(var(--modal-glass-overlay))] backdrop-blur-sm animate-in fade-in duration-300 pointer-events-auto', overlayClassName)}
         onClick={onClose}
       />
 
         <div
           className={cn(
-            'bg-white/78 dark:bg-[#0f172a]/86 text-foreground border border-zinc-200/70 dark:border-white/10 w-full rounded-[2.5rem] shadow-[0_24px_80px_rgba(15,23,42,0.18)] dark:shadow-2xl overflow-hidden relative z-10 animate-in zoom-in-95 duration-300 flex flex-col min-h-0 max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] pointer-events-auto backdrop-blur-2xl',
+            'bg-[hsl(var(--modal-glass-bg))] text-[hsl(var(--modal-glass-foreground))] border border-[hsl(var(--modal-glass-border))] w-full rounded-[2.5rem] shadow-[0_18px_48px_rgba(var(--modal-glass-shadow),0.10)] dark:shadow-2xl overflow-hidden relative z-10 animate-in zoom-in-95 duration-300 flex flex-col min-h-0 max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] pointer-events-auto backdrop-blur-2xl',
             maxWidthClassName,
             panelClassName,
           )}
@@ -192,7 +192,7 @@ export const GlassModalShell: React.FC<GlassModalShellProps> = ({
               </div>
             ) : null}
             <div className="min-w-0">
-              <h3 className={cn(titleClassName, 'font-black text-foreground dark:text-white tracking-tight truncate')}>{title}</h3>
+              <h3 className={cn(titleClassName, 'font-black text-[hsl(var(--modal-glass-foreground))] tracking-tight truncate')}>{title}</h3>
               {subtitle ? (
                 <p className={cn(subtitleClassName, 'font-bold tracking-widest truncate')}>{subtitle}</p>
               ) : null}
@@ -203,7 +203,7 @@ export const GlassModalShell: React.FC<GlassModalShellProps> = ({
               type="button"
               onClick={onClose}
               aria-label={closeLabel}
-              className="rounded-2xl h-12 w-12 p-0 hover:bg-zinc-100/80 dark:hover:bg-white/10 shrink-0 text-2xl text-foreground/50 dark:text-white/40 leading-none transition-colors"
+              className="rounded-2xl h-12 w-12 p-0 hover:bg-[hsl(var(--modal-glass-close-hover-bg))] shrink-0 text-2xl text-[hsl(var(--modal-glass-close-foreground))] leading-none transition-colors"
             >
               ×
             </button>
