@@ -9,7 +9,8 @@
     "localization",
     "password-fields",
     "theme-system",
-    "theme-toggle"
+    "theme-toggle",
+    "toast-ui"
   ],
   "exports": {
     "./form-fields": "./form-fields/index.ts",
@@ -18,7 +19,8 @@
     "./localization": "./localization/index.ts",
     "./password-fields": "./password-fields/index.ts",
     "./theme-system": "./theme-system/index.ts",
-    "./theme-toggle": "./theme-toggle/index.ts"
+    "./theme-toggle": "./theme-toggle/index.ts",
+    "./toast-ui": "./toast-ui/index.ts"
   },
   "peerDependencies": {
     "clsx": ">=2.1.1",
