@@ -43,6 +43,8 @@ export type SharedToastContainerProps = {
   topOffset?: string | undefined;
   bottomOffset?: string | undefined;
   rightOffset?: string | undefined;
+  topAnchorSelector?: string | undefined;
+  viewportGapPx?: number | undefined;
   onDismiss: (id: string) => void;
   onToggleDetails: (id: string) => void;
   onDoNotShowAgain: (id: string) => void;
@@ -55,6 +57,39 @@ const defaultI18n: ToastI18n = {
   hideDetails: 'Hide Details',
   copy: 'Copy',
 };
+
+const DEFAULT_TOAST_TOP_ANCHOR_SELECTOR = '[data-toast-top-anchor]';
+const DEFAULT_TOAST_VIEWPORT_GAP_PX = 16;
+const DEFAULT_TOP_OFFSET = 'max(1rem, calc(env(safe-area-inset-top, 0px) + 1rem))';
+
+function parsePixelValue(value: string | null | undefined): number {
+  const parsed = Number.parseFloat(value ?? '');
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function formatPixelOffset(value: number): string {
+  return `${Math.max(0, Math.ceil(value))}px`;
+}
+
+function resolveAutoTopOffsetPx(
+  ownerDocument: Document,
+  topAnchorSelector: string,
+  viewportGapPx: number,
+): number {
+  const safeAreaTop = parsePixelValue(
+    getComputedStyle(ownerDocument.documentElement).getPropertyValue('--safe-area-top'),
+  );
+  const baseOffset = safeAreaTop + viewportGapPx;
+
+  let anchorBottom = 0;
+  for (const anchor of ownerDocument.querySelectorAll<HTMLElement>(topAnchorSelector)) {
+    const rect = anchor.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) continue;
+    anchorBottom = Math.max(anchorBottom, rect.bottom);
+  }
+
+  return Math.max(baseOffset, anchorBottom + viewportGapPx);
+}
 
 export const ToastI18nContext = createContext<ToastI18n>(defaultI18n);
 
@@ -258,19 +293,82 @@ export const SharedToastContainer: React.FC<SharedToastContainerProps> = ({
   topOffset,
   bottomOffset,
   rightOffset,
+  topAnchorSelector,
+  viewportGapPx,
   onDismiss,
   onToggleDetails,
   onDoNotShowAgain,
   renderPortal,
 }) => {
-  const [mounted, setMounted] = useState(false);
+  const ownerDocument = portalTarget.ownerDocument;
+  const resolvedTopAnchorSelector = topAnchorSelector?.trim() || DEFAULT_TOAST_TOP_ANCHOR_SELECTOR;
+  const resolvedViewportGapPx = viewportGapPx ?? DEFAULT_TOAST_VIEWPORT_GAP_PX;
+  const [autoTopOffset, setAutoTopOffset] = useState<string | undefined>(() => {
+    if (placement !== 'top-right' || topOffset || !ownerDocument) return undefined;
+    return formatPixelOffset(
+      resolveAutoTopOffsetPx(ownerDocument, resolvedTopAnchorSelector, resolvedViewportGapPx),
+    );
+  });
 
   useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
+    if (placement !== 'top-right' || topOffset || !ownerDocument) {
+      setAutoTopOffset(undefined);
+      return undefined;
+    }
 
-  if (!mounted || toasts.length === 0) return null;
+    const syncAutoTopOffset = () => {
+      setAutoTopOffset(
+        formatPixelOffset(
+          resolveAutoTopOffsetPx(ownerDocument, resolvedTopAnchorSelector, resolvedViewportGapPx),
+        ),
+      );
+    };
+
+    const resizeObserver = typeof ResizeObserver === 'undefined'
+      ? null
+      : new ResizeObserver(() => {
+          syncAutoTopOffset();
+        });
+
+    const observeAnchors = () => {
+      resizeObserver?.disconnect();
+      if (!resizeObserver) return;
+      for (const anchor of ownerDocument.querySelectorAll<HTMLElement>(resolvedTopAnchorSelector)) {
+        resizeObserver.observe(anchor);
+      }
+    };
+
+    syncAutoTopOffset();
+    observeAnchors();
+
+    const mutationTarget = ownerDocument.body ?? ownerDocument.documentElement;
+    const mutationObserver = typeof MutationObserver === 'undefined'
+      ? null
+      : new MutationObserver(() => {
+          observeAnchors();
+          syncAutoTopOffset();
+        });
+
+    mutationObserver?.observe(mutationTarget, {
+      childList: true,
+      subtree: true,
+    });
+    ownerDocument.defaultView?.addEventListener('resize', syncAutoTopOffset);
+
+    return () => {
+      resizeObserver?.disconnect();
+      mutationObserver?.disconnect();
+      ownerDocument.defaultView?.removeEventListener('resize', syncAutoTopOffset);
+    };
+  }, [
+    ownerDocument,
+    placement,
+    resolvedTopAnchorSelector,
+    resolvedViewportGapPx,
+    topOffset,
+  ]);
+
+  if (toasts.length === 0) return null;
 
   const sharedStyle: React.CSSProperties = {
     right: rightOffset ?? 'max(1rem, calc(env(safe-area-inset-right) + 1rem))',
@@ -284,7 +382,7 @@ export const SharedToastContainer: React.FC<SharedToastContainerProps> = ({
       }
     : {
         ...sharedStyle,
-        top: topOffset ?? 'max(0.75rem, calc(env(safe-area-inset-top) + 0.75rem))',
+        top: topOffset ?? autoTopOffset ?? DEFAULT_TOP_OFFSET,
       };
 
   return renderPortal(
