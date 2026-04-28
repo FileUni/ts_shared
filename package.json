@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "files": [
+    "external-link",
     "form-fields",
     "language-menu",
     "modal-shell",
@@ -13,6 +14,7 @@
     "toast-ui"
   ],
   "exports": {
+    "./external-link": "./external-link/index.ts",
     "./form-fields": "./form-fields/index.ts",
     "./language-menu": "./language-menu/index.ts",
     "./modal-shell": "./modal-shell/index.ts",

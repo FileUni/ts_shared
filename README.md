@@ -8,6 +8,7 @@ Shared modules for `frontends/`, `OfficialSitePrivate/`, and `OfficialSiteDocs/`
 - `theme-system/`: theme preference parsing, theme bootstrap, theme application helpers
 - `language-menu/`: language menu options, shared menu styles, dropdown behavior for path-based locale switching
 - `theme-toggle/`: binary theme toggle behavior and shared toggle styles
+- `external-link/`: shared external link button shell for app-specific browser opening behavior
 - `form-fields/`: shared form primitives such as field wrappers and text inputs
 - `password-fields/`: password-specific inputs and strength UI
 
